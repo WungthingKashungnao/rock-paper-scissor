@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: #8cc461;
+  height: 100vh;
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+
+  padding-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 3rem;
+}
+
+/* header start */
+header {
+  width: 70%;
+  border: 1px solid white;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+header .head-title {
+  color: white;
+  font-size: 2rem;
+  font-weight: 500;
+}
+header .score-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+header .score-box .score-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  width: 120px;
+}
+header .score-box .score-area .score {
+  font-weight: bolder;
+  font-size: 2rem;
+  line-height: 2;
+}
+/* header end */
+
+/* main start */
+main {
+  border: 1px solid white;
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* play start */
+.play {
+  display: grid;
+  grid-template-columns: repeat(2, 150px);
+  grid-template-areas:
+    "rock scissor"
+    "paper paper";
+  /* justify-content: center; */
+  place-items: center;
+  gap: 50px;
+}
+
+.btn-choice[data-choice="rock"] {
+  grid-area: rock;
+}
+.btn-choice[data-choice="scissor"] {
+  grid-area: scissor;
+}
+.btn-choice[data-choice="paper"] {
+  grid-area: paper;
+}
+
+.play .rock,
+.scissor,
+.paper {
+  height: 150px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+}
+.line1 {
+  position: absolute;
+  top: 50%;
+  right: -100px;
+  z-index: -1;
+}
+.line2 {
+  position: absolute;
+  bottom: -90px;
+  left: -10px;
+  z-index: -1;
+}
+
+.line3 {
+  position: absolute;
+  top: -90px;
+  left: -10px;
+  z-index: -1;
+}
+.play .rock {
+  background-color: #0074b6;
+}
+.play .scissor {
+  background-color: #bd00ff;
+}
+.play .paper {
+  background-color: #ffa943;
+}
+.play .rock div,
+.scissor div,
+.paper div {
+  width: 80%;
+  height: 80%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+/* play end */
+/* main end */
