@@ -214,7 +214,12 @@ main {
   border: none;
   outline: none;
 }
-
+.innerLose {
+  background-color: #ffa943;
+}
+.innerWin {
+  background-color: #bd00ff;
+}
 .innerLose,
 .innerWin {
   display: flex;
@@ -225,12 +230,7 @@ main {
   height: 170px;
   border-radius: 50%;
 }
-.innerLose {
-  background-color: #ffa943;
-}
-.innerWin {
-  background-color: #bd00ff;
-}
+
 .fistInner {
   width: 270px;
   height: 270px;
