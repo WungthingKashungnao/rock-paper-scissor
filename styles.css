@@ -334,7 +334,70 @@ main {
 /* tieUp end */
 /* main end */
 
+/* winner page start */
+.winnerImg {
+  width: 40%;
+  position: relative;
+  overflow: hidden;
+}
+.winnerImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.winnerImg .torphy {
+  z-index: 3;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 15rem;
+  height: 15rem;
+}
+.winnerText {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.winnerText h2 {
+  font-size: 6rem;
+}
+.winnerText p {
+  font-size: 3rem;
+}
+.winnerText a {
+  position: absolute;
+  text-decoration: none;
+  color: white;
+  bottom: -4rem;
+
+  left: 50%;
+  transform: translateX(-50%);
+}
+.winnerText a button {
+  border-radius: 10px;
+  color: #6b6b6b;
+  padding: 0.7rem 2rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+/* winner page end */
+
 .rules {
+  cursor: pointer;
+  border: 1px solid white;
+  position: absolute;
+  bottom: 3rem;
+  right: 3rem;
+  padding: 0.5rem 2rem;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 1rem;
+  color: white;
+}
+
+.next {
   cursor: pointer;
   border: 1px solid white;
   position: absolute;

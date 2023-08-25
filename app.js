@@ -1,4 +1,5 @@
 let rules = document.getElementById("rules"); //rules button
+let nextId = document.getElementById("next"); //rules button
 let closeRules = document.getElementById("closeRules"); //close rules button
 let rulesNotice = document.getElementById("rulesNotice"); //rules notice
 let rockSelected = document.getElementById("rock");
@@ -13,12 +14,16 @@ let gameScoreData = {
   pc: 0,
   user: 0,
 };
+
+// code to score on page reload start
 let getScore = JSON.parse(localStorage.getItem("score"));
 if (getScore) {
   computerScore.innerHTML = getScore.pc;
   userScore.innerHTML = getScore.user;
 }
-
+// code to score on page reload end
+let ready = "no";
+let next; //varaiable to go to winning page
 // function to topen rules notice
 const openRulesNoice = () => {
   rulesNotice.style.visibility = "visible";
@@ -29,6 +34,7 @@ const closeRulesFunc = () => {
 };
 
 const playAgain = () => {
+  ready = false;
   main.innerHTML = "";
   return (main.innerHTML = `
       <div class="play">
@@ -50,11 +56,13 @@ const playAgain = () => {
 
 // function executed when the user click on any of the rock paper scissor
 const playGameStart = (id) => {
+  ready = "no";
   /*
     1= rock
     2= scissor
     3=paper
     */
+
   let pcChoice = Math.floor(Math.random() * 3 + 1); //generating choice for the pc
   let pcChoiceName; //this varibale is going to store the choice name of pc
   let myChoice = id;
@@ -69,6 +77,7 @@ const playGameStart = (id) => {
 
   //   rendering result based on the result of win, lose or tieup
   if (pcChoiceName === myChoice) {
+    ready = "no";
     // tie up condition
 
     //  styling the border of the choices start
@@ -109,6 +118,9 @@ const playGameStart = (id) => {
     (myChoice === "paper" && pcChoiceName === "rock") ||
     (myChoice === "scissor" && pcChoiceName === "paper")
   ) {
+    ready = "yes";
+    // winning condition
+
     let localBroswerDAta = JSON.parse(localStorage.getItem("score"));
     if (
       localBroswerDAta !== null &&
@@ -164,6 +176,8 @@ const playGameStart = (id) => {
     (myChoice === "rock" && pcChoiceName === "paper") ||
     (myChoice === "paper" && pcChoiceName === "scissor")
   ) {
+    ready = "no";
+    // losing condition
     let localBroswerDAta = JSON.parse(localStorage.getItem("score"));
     if (
       localBroswerDAta !== null &&
@@ -218,6 +232,19 @@ const playGameStart = (id) => {
     `);
   }
 };
+
+if (ready === "yes") {
+  nextId.style.visibility = "visble";
+  console.log(rules);
+  //   rules.style.right = "6rem";
+  if (getScore.user > getScore.pc) {
+    next = true;
+  } else {
+    next = false;
+  }
+} else if (ready === "no") {
+  nextId.style.visibility = "hidden";
+}
 
 rules.onclick = openRulesNoice;
 closeRules.onclick = closeRulesFunc;
