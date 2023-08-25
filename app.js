@@ -5,8 +5,20 @@ let rockSelected = document.getElementById("rock");
 let scissorSelected = document.getElementById("scissor");
 let paperSelected = document.getElementById("paper");
 let main = document.querySelector("main");
-let innerLose = document.getElementsByClassName("innerLose")[0];
-let innerWin = document.getElementsByClassName("innerWin")[0];
+let userScore = document.getElementById("user-score");
+let computerScore = document.getElementById("computer-score");
+
+//game score data
+let gameScoreData = {
+  pc: 0,
+  user: 0,
+};
+let getScore = JSON.parse(localStorage.getItem("score"));
+if (getScore) {
+  computerScore.innerHTML = getScore.pc;
+  userScore.innerHTML = getScore.user;
+}
+
 // function to topen rules notice
 const openRulesNoice = () => {
   rulesNotice.style.visibility = "visible";
@@ -59,28 +71,28 @@ const playGameStart = (id) => {
   if (pcChoiceName === myChoice) {
     // tie up condition
 
-    //  styling the border of the choices
-    if (pcChoiceName === "rock") {
-      innerLose.style.backgroundColor = "#0074b6";
-      innerWin.style.backgroundColor = "#0074b6";
-    } else if (pcChoiceName === "paper") {
-      innerLose.style.backgroundColor = "#ffa943";
-      innerWin.style.backgroundColor = "#ffa943";
-    } else if (pcChoiceName === "scissor") {
-      innerLose.style.backgroundColor = "#bd00ff";
-      innerWin.style.backgroundColor = "#bd00ff";
-    }
-
+    //  styling the border of the choices start
+    // if (pcChoiceName === "rock") {
+    //   userPickTieUp.style.backgroundColor = "#0074b6";
+    //   pcPickTieUp.style.backgroundColor = "#0074b6";
+    // } else if (pcChoiceName === "paper") {
+    //   userPickTieUp.style.backgroundColor = "#ffa943";
+    //   pcPickTieUp.style.backgroundColor = "#ffa943";
+    // } else if (pcChoiceName === "scissor") {
+    //   userPickTieUp.style.backgroundColor = "#bd00ff";
+    //   pcPickTieUp.style.backgroundColor = "#bd00ff";
+    // }
+    //  styling the border of the choices end
     main.innerHTML = "";
     return (main.innerHTML = `
     <div class="tieUp">
-        <div class="userPickTieUp">
+        <div id='userPickTieUp' class="userPickTieUp">
           <p class="tieUpText">YOU PICKED</p>
           <div>
             <img src="/images/${id}.png" alt="" />
           </div>
         </div>
-        <div class="pcPickTieUp">
+        <div id='pcPickTieUp' class="pcPickTieUp">
           <p class="tieUpText">PC PICKED</p>
           <div>
             <img src="/images/${pcChoiceName}.png" alt="" />
@@ -97,6 +109,27 @@ const playGameStart = (id) => {
     (myChoice === "paper" && pcChoiceName === "rock") ||
     (myChoice === "scissor" && pcChoiceName === "paper")
   ) {
+    let localBroswerDAta = JSON.parse(localStorage.getItem("score"));
+    if (
+      localBroswerDAta !== null &&
+      localBroswerDAta.user !== 0 &&
+      localBroswerDAta.user !== null
+    ) {
+      // getting data local browser and updating ther score
+      let scoreData = JSON.parse(localStorage.getItem("score"));
+      scoreData.user++;
+      console.log(scoreData);
+      localStorage.setItem("score", JSON.stringify(scoreData));
+      let updatedScore = JSON.parse(localStorage.getItem("score"));
+      userScore.innerHTML = updatedScore.user;
+      console.log(updatedScore);
+    } else if (gameScoreData.user === 0) {
+      gameScoreData.user++;
+      localStorage.setItem("score", JSON.stringify(gameScoreData));
+      let scoreData = JSON.parse(localStorage.getItem("score"));
+      userScore.innerHTML = scoreData.user;
+    }
+
     // winning condition
     main.innerHTML = "";
     return (main.innerHTML = `
@@ -131,6 +164,27 @@ const playGameStart = (id) => {
     (myChoice === "rock" && pcChoiceName === "paper") ||
     (myChoice === "paper" && pcChoiceName === "scissor")
   ) {
+    let localBroswerDAta = JSON.parse(localStorage.getItem("score"));
+    if (
+      localBroswerDAta !== null &&
+      localBroswerDAta.pc !== 0 &&
+      localBroswerDAta.pc !== null
+    ) {
+      // getting data local browser and updating ther score
+      let scoreData = JSON.parse(localStorage.getItem("score"));
+      scoreData.pc++;
+      console.log(scoreData);
+      localStorage.setItem("score", JSON.stringify(scoreData));
+      let updatedScore = JSON.parse(localStorage.getItem("score"));
+      computerScore.innerHTML = updatedScore.pc;
+      console.log(updatedScore);
+    } else if (gameScoreData.pc === 0) {
+      gameScoreData.pc++;
+      localStorage.setItem("score", JSON.stringify(gameScoreData));
+      let scoreData = JSON.parse(localStorage.getItem("score"));
+      computerScore.innerHTML = scoreData.pc;
+    }
+
     // losing condition
     main.innerHTML = "";
     return (main.innerHTML = `
