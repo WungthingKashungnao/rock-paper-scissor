@@ -5,6 +5,7 @@
   box-sizing: border-box;
 }
 body {
+  position: relative;
   background-color: #8cc461;
   height: 100vh;
   width: 100%;
@@ -332,3 +333,73 @@ main {
 }
 /* tieUp end */
 /* main end */
+
+.rules {
+  cursor: pointer;
+  border: 1px solid white;
+  position: absolute;
+  bottom: 3rem;
+  right: 3rem;
+  padding: 0.5rem 2rem;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 1rem;
+  color: white;
+}
+
+.rulesNotice {
+  z-index: 5;
+  visibility: hidden;
+  position: absolute;
+  bottom: 6rem;
+  right: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  border: 8px solid white;
+  border-radius: 10px;
+  padding: 1.5rem 2rem;
+  background-color: #004429;
+}
+
+.rulesNotice h2 {
+  color: white;
+  font-size: 2rem;
+  font-weight: 400;
+}
+.rulesNotice ul {
+  list-style: none;
+  font-size: 1rem;
+  color: white;
+}
+.rulesNotice ul li {
+  margin-bottom: 1rem;
+}
+.rulesNotice ul li::before {
+  content: "\25A0";
+  color: #ffd600;
+  font-weight: bold;
+  display: inline-block;
+  width: 1rem;
+  margin-left: -1em;
+}
+.rulesNotice .closeRules {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  font-size: 2.3rem;
+  font-weight: bold;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  border: 6px solid white;
+  top: -50px;
+  right: -50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
