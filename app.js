@@ -1,5 +1,7 @@
 let rules = document.getElementById("rules"); //rules button
-let nextId = document.getElementById("next"); //rules button
+let nextId = document.getElementById("next"); //next button
+let closeLosingNotice = document.getElementById("closeLosingNotice"); //closeLosingNotice button
+let losingNotice = document.getElementById("losingNotice"); //losingNotice
 let closeRules = document.getElementById("closeRules"); //close rules button
 let rulesNotice = document.getElementById("rulesNotice"); //rules notice
 let rockSelected = document.getElementById("rock");
@@ -22,8 +24,7 @@ if (getScore) {
   userScore.innerHTML = getScore.user;
 }
 // code to score on page reload end
-let ready = "no";
-let next; //varaiable to go to winning page
+
 // function to topen rules notice
 const openRulesNoice = () => {
   rulesNotice.style.visibility = "visible";
@@ -32,9 +33,14 @@ const openRulesNoice = () => {
 const closeRulesFunc = () => {
   rulesNotice.style.visibility = "hidden";
 };
+// function to close losing notice
+const closeLosingNoticeFunc = () => {
+  losingNotice.style.visibility = "hidden";
+};
 
 const playAgain = () => {
-  ready = false;
+  rules.style.right = "3rem";
+  nextId.style.visibility = "hidden";
   main.innerHTML = "";
   return (main.innerHTML = `
       <div class="play">
@@ -56,7 +62,6 @@ const playAgain = () => {
 
 // function executed when the user click on any of the rock paper scissor
 const playGameStart = (id) => {
-  ready = "no";
   /*
     1= rock
     2= scissor
@@ -77,7 +82,8 @@ const playGameStart = (id) => {
 
   //   rendering result based on the result of win, lose or tieup
   if (pcChoiceName === myChoice) {
-    ready = "no";
+    rules.style.right = "3rem";
+    nextId.style.visibility = "hidden";
     // tie up condition
 
     //  styling the border of the choices start
@@ -118,7 +124,16 @@ const playGameStart = (id) => {
     (myChoice === "paper" && pcChoiceName === "rock") ||
     (myChoice === "scissor" && pcChoiceName === "paper")
   ) {
-    ready = "yes";
+    rules.style.right = "12rem";
+    nextId.style.visibility = "visible";
+    // if user score is greater than pc score
+    if (getScore.user > getScore.pc) {
+      nextId.innerHTML = `<a href="./winnder.html">NEXT</a>`;
+    } else if (getScore.pc > getScore.user || getScore.pc === getScore.user) {
+      nextId.addEventListener("click", () => {
+        losingNotice.style.visibility = "visible";
+      });
+    }
     // winning condition
 
     let localBroswerDAta = JSON.parse(localStorage.getItem("score"));
@@ -130,11 +145,9 @@ const playGameStart = (id) => {
       // getting data local browser and updating ther score
       let scoreData = JSON.parse(localStorage.getItem("score"));
       scoreData.user++;
-      console.log(scoreData);
       localStorage.setItem("score", JSON.stringify(scoreData));
       let updatedScore = JSON.parse(localStorage.getItem("score"));
       userScore.innerHTML = updatedScore.user;
-      console.log(updatedScore);
     } else if (gameScoreData.user === 0) {
       gameScoreData.user++;
       localStorage.setItem("score", JSON.stringify(gameScoreData));
@@ -176,7 +189,8 @@ const playGameStart = (id) => {
     (myChoice === "rock" && pcChoiceName === "paper") ||
     (myChoice === "paper" && pcChoiceName === "scissor")
   ) {
-    ready = "no";
+    rules.style.right = "3rem";
+    nextId.style.visibility = "hidden";
     // losing condition
     let localBroswerDAta = JSON.parse(localStorage.getItem("score"));
     if (
@@ -187,11 +201,9 @@ const playGameStart = (id) => {
       // getting data local browser and updating ther score
       let scoreData = JSON.parse(localStorage.getItem("score"));
       scoreData.pc++;
-      console.log(scoreData);
       localStorage.setItem("score", JSON.stringify(scoreData));
       let updatedScore = JSON.parse(localStorage.getItem("score"));
       computerScore.innerHTML = updatedScore.pc;
-      console.log(updatedScore);
     } else if (gameScoreData.pc === 0) {
       gameScoreData.pc++;
       localStorage.setItem("score", JSON.stringify(gameScoreData));
@@ -233,21 +245,9 @@ const playGameStart = (id) => {
   }
 };
 
-if (ready === "yes") {
-  nextId.style.visibility = "visble";
-  console.log(rules);
-  //   rules.style.right = "6rem";
-  if (getScore.user > getScore.pc) {
-    next = true;
-  } else {
-    next = false;
-  }
-} else if (ready === "no") {
-  nextId.style.visibility = "hidden";
-}
-
 rules.onclick = openRulesNoice;
 closeRules.onclick = closeRulesFunc;
+closeLosingNotice.onclick = closeLosingNoticeFunc;
 rockSelected.onclick = () => playGameStart(rockSelected.id);
 scissorSelected.onclick = () => playGameStart(scissorSelected.id);
 paperSelected.onclick = () => playGameStart(paperSelected.id);

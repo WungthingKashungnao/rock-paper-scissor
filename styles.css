@@ -18,7 +18,10 @@ body {
   align-items: center;
   gap: 3rem;
 }
-
+a {
+  text-decoration: none;
+  color: white;
+}
 /* header start */
 header {
   width: 70%;
@@ -398,6 +401,7 @@ main {
 }
 
 .next {
+  visibility: hidden;
   cursor: pointer;
   border: 1px solid white;
   position: absolute;
@@ -464,5 +468,29 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+}
+#losingNotice {
+  z-index: 5;
+  visibility: hidden;
+  position: absolute;
+  bottom: 6rem;
+  right: 3rem;
+  flex-wrap: wrap;
+  border: 8px solid white;
+  border-radius: 10px;
+  padding: 1.5rem 2rem;
+  background-color: #004429;
+  color: white;
+  font-size: 1.3rem;
+}
+#losingNotice #closeLosingNotice {
+  position: absolute;
+  border: 8px solid white;
+  border-radius: 50%;
+  background-color: red;
+  padding: 0.6rem;
+  top: -40px;
+  right: -30px;
   cursor: pointer;
 }
