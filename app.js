@@ -19,6 +19,7 @@ let gameScoreData = {
 
 // code to score on page reload start
 let getScore = JSON.parse(localStorage.getItem("score"));
+console.log(getScore);
 if (getScore) {
   computerScore.innerHTML = getScore.pc;
   userScore.innerHTML = getScore.user;
@@ -126,17 +127,25 @@ const playGameStart = (id) => {
   ) {
     rules.style.right = "12rem";
     nextId.style.visibility = "visible";
+
     // if user score is greater than pc score
-    if (getScore.user > getScore.pc) {
+    let localBroswerDAta = JSON.parse(localStorage.getItem("score"));
+
+    if (localBroswerDAta.user > localBroswerDAta.pc) {
       nextId.innerHTML = `<a href="./winnder.html">NEXT</a>`;
-    } else if (getScore.pc > getScore.user || getScore.pc === getScore.user) {
-      nextId.addEventListener("click", () => {
-        losingNotice.style.visibility = "visible";
-      });
     }
+    // else if (
+    //   localBroswerDAta.pc > localBroswerDAta.user ||
+    //   localBroswerDAta.pc === localBroswerDAta.user
+    // ) {
+    //   nextId.addEventListener("click", () => {
+    //     losingNotice.style.visibility = "visible";
+    //   });
+    // }
     // winning condition
 
-    let localBroswerDAta = JSON.parse(localStorage.getItem("score"));
+    // let localBroswerDAta = JSON.parse(localStorage.getItem("score"));
+
     if (
       localBroswerDAta !== null &&
       localBroswerDAta.user !== 0 &&
