@@ -128,21 +128,8 @@ const playGameStart = (id) => {
     rules.style.right = "12rem";
     nextId.style.visibility = "visible";
 
-    // if user score is greater than pc score
-    let localBroswerDAta = JSON.parse(localStorage.getItem("score"));
-
-    if (localBroswerDAta.user > localBroswerDAta.pc) {
-      nextId.innerHTML = `<a href="./winnder.html">NEXT</a>`;
-    }
-    // else if (
-    //   localBroswerDAta.pc > localBroswerDAta.user ||
-    //   localBroswerDAta.pc === localBroswerDAta.user
-    // ) {
-    //   nextId.addEventListener("click", () => {
-    //     losingNotice.style.visibility = "visible";
-    //   });
-    // }
     // winning condition
+    let localBroswerDAta = JSON.parse(localStorage.getItem("score"));
 
     // let localBroswerDAta = JSON.parse(localStorage.getItem("score"));
 
@@ -163,6 +150,18 @@ const playGameStart = (id) => {
       let scoreData = JSON.parse(localStorage.getItem("score"));
       userScore.innerHTML = scoreData.user;
     }
+    // if user score is greater than pc score
+    // if (localBroswerDAta.user > localBroswerDAta.pc) {
+    //   nextId.innerHTML = `<a href="./winnder.html">NEXT</a>`;
+    // }
+    // else if (
+    //   localBroswerDAta.pc > localBroswerDAta.user ||
+    //   localBroswerDAta.pc === localBroswerDAta.user
+    // ) {
+    //   nextId.addEventListener("click", () => {
+    //     losingNotice.style.visibility = "visible";
+    //   });
+    // }
 
     // winning condition
     main.innerHTML = "";
