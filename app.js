@@ -16,7 +16,7 @@ let gameScoreData = {
   pc: 0,
   user: 0,
 };
-
+let tieUpBorderColor; //variable to change bordecolor on tieup condition
 // code to score on page reload start
 let getScore = JSON.parse(localStorage.getItem("score"));
 console.log(getScore);
@@ -75,26 +75,54 @@ const playGameStart = (id) => {
     pcChoiceName = "paper";
   }
 
+  // function to change border color
+  let changeBorderColor = () => {
+    if (tieUpBorderColor === false) {
+      if (myChoice === "rock") {
+        document.getElementsByClassName("innerWin")[0].style.backgroundColor =
+          "#0074b6";
+      } else if (myChoice === "paper") {
+        document.getElementsByClassName("innerWin")[0].style.backgroundColor =
+          "#ffa943";
+      } else if (pcChoiceName === "scissor") {
+        document.getElementsByClassName("innerWin")[0].style.backgroundColor =
+          "#bd00ff";
+      }
+      if (pcChoiceName === "rock") {
+        document.getElementsByClassName("innerLose")[0].style.backgroundColor =
+          "#0074b6";
+      } else if (pcChoiceName === "paper") {
+        document.getElementsByClassName("innerLose")[0].style.backgroundColor =
+          "#ffa943";
+      } else if (pcChoiceName === "scissor") {
+        document.getElementsByClassName("innerLose")[0].style.backgroundColor =
+          "#bd00ff";
+      }
+    }
+    if (tieUpBorderColor === true) {
+      if (pcChoiceName === "rock") {
+        userPickTieUp.style.backgroundColor = "#0074b6";
+        pcPickTieUp.style.backgroundColor = "#0074b6";
+      } else if (pcChoiceName === "paper") {
+        userPickTieUp.style.backgroundColor = "#ffa943";
+        pcPickTieUp.style.backgroundColor = "#ffa943";
+      } else if (pcChoiceName === "scissor") {
+        userPickTieUp.style.backgroundColor = "#bd00ff";
+        pcPickTieUp.style.backgroundColor = "#bd00ff";
+      }
+    }
+    tieUpBorderColor = false;
+  };
+
   //   rendering result based on the result of win, lose or tieup
   if (pcChoiceName === myChoice) {
     rules.style.right = "3rem";
     nextId.style.visibility = "hidden";
     // tie up condition
 
-    //  styling the border of the choices start
-    // if (pcChoiceName === "rock") {
-    //   userPickTieUp.style.backgroundColor = "#0074b6";
-    //   pcPickTieUp.style.backgroundColor = "#0074b6";
-    // } else if (pcChoiceName === "paper") {
-    //   userPickTieUp.style.backgroundColor = "#ffa943";
-    //   pcPickTieUp.style.backgroundColor = "#ffa943";
-    // } else if (pcChoiceName === "scissor") {
-    //   userPickTieUp.style.backgroundColor = "#bd00ff";
-    //   pcPickTieUp.style.backgroundColor = "#bd00ff";
-    // }
-    //  styling the border of the choices end
-    main.innerHTML = "";
-    return (main.innerHTML = `
+    try {
+      main.innerHTML = "";
+      return (main.innerHTML = `
     <div class="tieUp">
         <div id='userPickTieUp' class="userPickTieUp">
           <p class="tieUpText">YOU PICKED</p>
@@ -114,6 +142,10 @@ const playGameStart = (id) => {
         </div>
       </div>
     `);
+    } finally {
+      tieUpBorderColor = true;
+      changeBorderColor();
+    }
   } else if (
     (myChoice === "rock" && pcChoiceName === "scissor") ||
     (myChoice === "paper" && pcChoiceName === "rock") ||
@@ -142,8 +174,9 @@ const playGameStart = (id) => {
     }
 
     // winning condition
-    main.innerHTML = "";
-    return (main.innerHTML = `
+    try {
+      main.innerHTML = "";
+      return (main.innerHTML = `
     <div class="gameResult winningGame">
         <div class="userPick">
           <div class="fistInner">
@@ -170,6 +203,9 @@ const playGameStart = (id) => {
         </div>
       </div>
     `);
+    } finally {
+      changeBorderColor();
+    }
   } else if (
     (myChoice === "scissor" && pcChoiceName === "rock") ||
     (myChoice === "rock" && pcChoiceName === "paper") ||
@@ -198,8 +234,9 @@ const playGameStart = (id) => {
     }
 
     // losing condition
-    main.innerHTML = "";
-    return (main.innerHTML = `
+    try {
+      main.innerHTML = "";
+      return (main.innerHTML = `
     <div class="gameResult losingGame">
         <div class="computerPick">
           <div class="innerLose">
@@ -226,6 +263,9 @@ const playGameStart = (id) => {
         </div>
       </div>
     `);
+    } finally {
+      changeBorderColor();
+    }
   }
 };
 
