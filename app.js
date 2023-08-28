@@ -63,12 +63,6 @@ const playAgain = () => {
 
 // function executed when the user click on any of the rock paper scissor
 const playGameStart = (id) => {
-  /*
-    1= rock
-    2= scissor
-    3=paper
-    */
-
   let pcChoice = Math.floor(Math.random() * 3 + 1); //generating choice for the pc
   let pcChoiceName; //this varibale is going to store the choice name of pc
   let myChoice = id;
@@ -125,14 +119,10 @@ const playGameStart = (id) => {
     (myChoice === "paper" && pcChoiceName === "rock") ||
     (myChoice === "scissor" && pcChoiceName === "paper")
   ) {
+    // winning condition
     rules.style.right = "12rem";
     nextId.style.visibility = "visible";
-
-    // winning condition
     let localBroswerDAta = JSON.parse(localStorage.getItem("score"));
-
-    // let localBroswerDAta = JSON.parse(localStorage.getItem("score"));
-
     if (
       localBroswerDAta !== null &&
       localBroswerDAta.user !== 0 &&
@@ -150,18 +140,6 @@ const playGameStart = (id) => {
       let scoreData = JSON.parse(localStorage.getItem("score"));
       userScore.innerHTML = scoreData.user;
     }
-    // if user score is greater than pc score
-    // if (localBroswerDAta.user > localBroswerDAta.pc) {
-    //   nextId.innerHTML = `<a href="./winnder.html">NEXT</a>`;
-    // }
-    // else if (
-    //   localBroswerDAta.pc > localBroswerDAta.user ||
-    //   localBroswerDAta.pc === localBroswerDAta.user
-    // ) {
-    //   nextId.addEventListener("click", () => {
-    //     losingNotice.style.visibility = "visible";
-    //   });
-    // }
 
     // winning condition
     main.innerHTML = "";
@@ -229,7 +207,6 @@ const playGameStart = (id) => {
           </div>
           <p class="pcPickText">PC PICKED</p>
         </div>
-
         <div class="userPick">
           <div class="fistInner">
             <div class="secondInner">
@@ -242,7 +219,6 @@ const playGameStart = (id) => {
           </div>
           <p class="userPickText">YOU PICKED</p>
         </div>
-
         <div class="winResultText">
           <h3>YOU LOST</h3>
           <p>AGAINST PC</p>
