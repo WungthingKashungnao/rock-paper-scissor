@@ -25,7 +25,6 @@ if (getScore) {
   userScore.innerHTML = getScore.user;
 }
 // code to score on page reload end
-
 // function to topen rules notice
 const openRulesNoice = () => {
   rulesNotice.style.visibility = "visible";
@@ -38,7 +37,6 @@ const closeRulesFunc = () => {
 const closeLosingNoticeFunc = () => {
   losingNotice.style.visibility = "hidden";
 };
-
 const playAgain = () => {
   rules.style.right = "3rem";
   nextId.style.visibility = "hidden";
@@ -60,7 +58,6 @@ const playAgain = () => {
         </div>
       `);
 };
-
 // function executed when the user click on any of the rock paper scissor
 const playGameStart = (id) => {
   let pcChoice = Math.floor(Math.random() * 3 + 1); //generating choice for the pc
@@ -74,7 +71,6 @@ const playGameStart = (id) => {
   } else if (pcChoice === 3) {
     pcChoiceName = "paper";
   }
-
   // function to change border color
   let changeBorderColor = () => {
     if (tieUpBorderColor === false) {
@@ -84,7 +80,7 @@ const playGameStart = (id) => {
       } else if (myChoice === "paper") {
         document.getElementsByClassName("innerWin")[0].style.backgroundColor =
           "#ffa943";
-      } else if (pcChoiceName === "scissor") {
+      } else if (myChoice === "scissor") {
         document.getElementsByClassName("innerWin")[0].style.backgroundColor =
           "#bd00ff";
       }
@@ -113,13 +109,11 @@ const playGameStart = (id) => {
     }
     tieUpBorderColor = false;
   };
-
   //   rendering result based on the result of win, lose or tieup
   if (pcChoiceName === myChoice) {
     rules.style.right = "3rem";
     nextId.style.visibility = "hidden";
     // tie up condition
-
     try {
       main.innerHTML = "";
       return (main.innerHTML = `
@@ -172,8 +166,6 @@ const playGameStart = (id) => {
       let scoreData = JSON.parse(localStorage.getItem("score"));
       userScore.innerHTML = scoreData.user;
     }
-
-    // winning condition
     try {
       main.innerHTML = "";
       return (main.innerHTML = `
@@ -232,14 +224,12 @@ const playGameStart = (id) => {
       let scoreData = JSON.parse(localStorage.getItem("score"));
       computerScore.innerHTML = scoreData.pc;
     }
-
-    // losing condition
     try {
       main.innerHTML = "";
       return (main.innerHTML = `
     <div class="gameResult losingGame">
         <div class="computerPick">
-          <div class="innerLose">
+          <div class=" innerLose">
             <div class="resPlay"><img src="./images/${pcChoiceName}.png" alt="" /></div>
           </div>
           <p class="pcPickText">PC PICKED</p>
@@ -268,7 +258,6 @@ const playGameStart = (id) => {
     }
   }
 };
-
 rules.onclick = openRulesNoice;
 closeRules.onclick = closeRulesFunc;
 closeLosingNotice.onclick = closeLosingNoticeFunc;
